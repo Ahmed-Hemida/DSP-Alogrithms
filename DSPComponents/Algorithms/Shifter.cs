@@ -15,7 +15,18 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            throw new NotImplementedException();
+            List<int> temp = new List<int>();
+            if(InputSignal.Periodic==true)
+                for (int i = 0; i < InputSignal.Samples.Count; i++)
+                {
+                   InputSignal.SamplesIndices[i]-= ShiftingValue;
+                }
+            else
+                for (int i = 0; i < InputSignal.Samples.Count; i++)
+                {
+                    InputSignal.SamplesIndices[i] += ShiftingValue;
+                }
+            OutputShiftedSignal = InputSignal;
         }
     }
 }

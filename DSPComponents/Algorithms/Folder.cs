@@ -14,7 +14,13 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            throw new NotImplementedException();
+            List<float> temp = new List<float>();
+            for (int i = InputSignal.Samples.Count - 1; i >= 0; i--)
+            {
+                temp.Add(InputSignal.Samples[i]);
+            }
+            OutputFoldedSignal = new Signal(temp, InputSignal.SamplesIndices, false);
+            OutputFoldedSignal.Periodic = InputSignal.Periodic;
         }
     }
 }
