@@ -49,7 +49,7 @@ namespace DSPAlgorithms.Algorithms
 
 
 
-            OutputShiftedSignal = new Signal(mylistsamples, mylistindces, !InputSignal.Periodic);
+            OutputShiftedSignal = new Signal(mylistsamples, mylistindces, InputSignal.Periodic);
 
         }
     }
