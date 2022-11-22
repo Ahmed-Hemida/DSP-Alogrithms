@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AccumlatorSumTestCases.cs" />
     <Compile Include="AdderTestCases.cs" />
     <Compile Include="ConvolutionTestCases.cs" />
     <Compile Include="CorrelationTestCases.cs" />
