@@ -18,7 +18,7 @@ namespace DSPComponentsUnitTest
         public void AutoDirectNonNormalizedNonPeriodicCorrelationTestMethod1()
         {
             DirectCorrelation dc = new DirectCorrelation();
-            
+
             var expectedOutput = new Signal(new List<float>() {
                                            #region expectedOutput
 0.145421785526316f,
@@ -100,7 +100,7 @@ namespace DSPComponentsUnitTest
 #endregion
                                                  }, false);
 
-            
+
             dc.InputSignal1 = new Signal(new List<float>() {
                     #region input
                      0.0078f,
@@ -181,7 +181,7 @@ namespace DSPComponentsUnitTest
                      0.0074f
 #endregion
                    }, false);
-            
+
             dc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, dc.OutputNonNormalizedCorrelation));
@@ -359,7 +359,7 @@ namespace DSPComponentsUnitTest
             dc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, dc.OutputNonNormalizedCorrelation));
-        
+
         }
 
         [TestMethod]
@@ -535,7 +535,7 @@ namespace DSPComponentsUnitTest
             dc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, dc.OutputNormalizedCorrelation));
-        
+
         }
 
         [TestMethod]
@@ -724,7 +724,7 @@ namespace DSPComponentsUnitTest
             dc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, dc.OutputNonNormalizedCorrelation));
-        
+
         }
 
         [TestMethod]
@@ -738,7 +738,7 @@ namespace DSPComponentsUnitTest
             dc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, dc.OutputNonNormalizedCorrelation));
-        
+
         }
 
         [TestMethod]
@@ -753,8 +753,8 @@ namespace DSPComponentsUnitTest
             dc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, dc.OutputNormalizedCorrelation));
-        
-       
+
+
         }
 
         [TestMethod]
@@ -769,8 +769,8 @@ namespace DSPComponentsUnitTest
             dc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, dc.OutputNormalizedCorrelation));
-        
-       
+
+
         }
 
         #endregion auto direct correlation
@@ -781,7 +781,7 @@ namespace DSPComponentsUnitTest
         {
             FastCorrelation fc = new FastCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 1.00f, 0.50f, 0.00f, 0.50f}, false);
+            var expectedOutput = new Signal(new List<float>() { 1.00f, 0.50f, 0.00f, 0.50f }, false);
 
             fc.InputSignal1 = new Signal(new List<float>() { 1, 0, 0, 1 }, true);
 
@@ -789,13 +789,13 @@ namespace DSPComponentsUnitTest
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNormalizedCorrelation));
         }
-       
+
         [TestMethod]
         public void AutoFastNonNormalizedCorrelationTestMethod1()
         {
             FastCorrelation fc = new FastCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 0.50f, 0.25f, 0.00f, 0.25f}, false);
+            var expectedOutput = new Signal(new List<float>() { 0.50f, 0.25f, 0.00f, 0.25f }, false);
 
             fc.InputSignal1 = new Signal(new List<float>() { 1, 0, 0, 1 }, true);
 
@@ -824,8 +824,8 @@ namespace DSPComponentsUnitTest
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNonNormalizedCorrelation));
         }
 
-        #endregion 
-        
+        #endregion
+
         #region cross direct correlation
 
         [TestMethod]
@@ -833,10 +833,11 @@ namespace DSPComponentsUnitTest
         {
             DirectCorrelation fc = new DirectCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 4.8333333f, 2.8333333f, 2.0000000f, 0.0000000f, 0.0000000f, 0.0000000f}, false);
+            var expectedOutput = new Signal(new List<float>() { 7.25f, 4.25f, 3f, 0f }, false);
 
             fc.InputSignal1 = new Signal(new List<float>() { 4, 3, 1, 6 }, false);
-            fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3}, false);
+            //fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3}, false);
+            fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3, 0 }, false);
 
             fc.Run();
 
@@ -848,10 +849,12 @@ namespace DSPComponentsUnitTest
         {
             DirectCorrelation fc = new DirectCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 4.8333333f, 2.8333333f, 2.0000000f, 5.0000000f, 2.8333333f, 5.8333333f }, false);
+            //var expectedOutput = new Signal(new List<float>() { 4.8333333f, 2.8333333f, 2.0000000f, 5.0000000f, 2.8333333f, 5.8333333f }, false);
+            var expectedOutput = new Signal(new List<float>() { 7.25f, 11.75f, 7.25f, 8.75f }, false);
 
             fc.InputSignal1 = new Signal(new List<float>() { 4, 3, 1, 6 }, true);
-            fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3 }, true);
+            //fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3 }, true);
+            fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3, 0 }, true);
 
             fc.Run();
 
@@ -859,29 +862,16 @@ namespace DSPComponentsUnitTest
         }
 
         [TestMethod]
-        public void CrossDirectNormalizedNonPeriodicCorrelationTestMethod1()
-        {
-            DirectCorrelation fc = new DirectCorrelation();
-
-            var expectedOutput = new Signal(new List<float>() { 0.5974621f, 0.3502364f, 0.2472257f, 0.0000000f, 0.0000000f, 0.0000000f}, false);
-
-            fc.InputSignal1 = new Signal(new List<float>() { 4, 3, 1, 6 }, false);
-            fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3 }, false);
-
-            fc.Run();
-
-            Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNormalizedCorrelation));
-        }
-
-        [TestMethod]
         public void CrossDirectNormalizedPeriodicCorrelationTestMethod1()
         {
             DirectCorrelation fc = new DirectCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() {0.5974621f, 0.3502364f, 0.2472257f, 0.6180642f, 0.3502364f, 0.7210749f, }, false);
+            //var expectedOutput = new Signal(new List<float>() {0.5974621f, 0.3502364f, 0.2472257f, 0.6180642f, 0.3502364f, 0.7210749f, }, false);
+            var expectedOutput = new Signal(new List<float>() { 0.5974621f, 0.9683006f, 0.5974621f, 0.7210749f }, false);
 
             fc.InputSignal1 = new Signal(new List<float>() { 4, 3, 1, 6 }, true);
-            fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3 }, true);
+            //fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3 }, true);
+            fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3, 0 }, true);
 
             fc.Run();
 
@@ -893,11 +883,11 @@ namespace DSPComponentsUnitTest
         {
             DirectCorrelation fc = new DirectCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 0.7142857f, 0.8571429f, 1.1428571f, 0.0000000f, 0.0000000f, 0.0000000f, 0.0000000f }, false);
+            var expectedOutput = new Signal(new List<float>() { 1f, 1.2f, 1.6f, 0, 0 }, false);
 
-            fc.InputSignal1 = new Signal(new List<float>() { 2, 1 , 0, 0, 3 }, false);
-            fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4 }, false);
-
+            fc.InputSignal1 = new Signal(new List<float>() { 2, 1, 0, 0, 3 }, false);
+            //fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4 }, false);
+            fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4, 0, 0 }, false);
             fc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNonNormalizedCorrelation));
@@ -908,27 +898,15 @@ namespace DSPComponentsUnitTest
         {
             DirectCorrelation fc = new DirectCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 0.7142857f, 0.8571429f, 1.1428571f, 0.8571429f, 0.4285714f, 1.7142857f, 0.2857143f }, false);
-
+            //var expectedOutput = new Signal(new List<float>() { 0.7142857f, 0.8571429f, 1.1428571f, 0.8571429f, 0.4285714f, 1.7142857f, 0.2857143f }, false);
+            var expectedOutput = new Signal(new List<float>() { 1f, 2.4f, 2.2f, 2.4f, 0.4f }, false);
             fc.InputSignal1 = new Signal(new List<float>() { 2, 1, 0, 0, 3 }, true);
-            fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4 }, true); 
-            
+            //fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4 }, true); 
+            fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4, 0, 0 }, true);
+
             fc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNonNormalizedCorrelation));
-        }
-
-        [TestMethod]
-        public void CrossDirectNormalizedNonPeriodicCorrelationTestMethod2()
-        {
-            DirectCorrelation fc = new DirectCorrelation();
-
-            var expectedOutput = new Signal(new List<float>() { 0.2916059f, 0.3499271f, 0.4665695f, 0.0000000f, 0.0000000f, 0.0000000f, 0.0000000f}, false);
-            
-            fc.InputSignal1 = new Signal(new List<float>() { 2, 1, 0, 0, 3 }, false);
-            fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4 }, false); fc.Run();
-
-            Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNormalizedCorrelation));
         }
 
         [TestMethod]
@@ -936,25 +914,27 @@ namespace DSPComponentsUnitTest
         {
             DirectCorrelation fc = new DirectCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 0.2916059f, 0.3499271f, 0.4665695f, 0.3499271f, 0.1749636f, 0.6998542f, 0.1166424f, }, false);
+            //var expectedOutput = new Signal(new List<float>() { 0.2916059f, 0.3499271f, 0.4665695f, 0.3499271f, 0.1749636f, 0.6998542f, 0.1166424f, }, false);
+            var expectedOutput = new Signal(new List<float>() { 0.2916059f, 0.6998542f, 0.6415330f, 0.6998542f, 0.1166424f }, false);
 
             fc.InputSignal1 = new Signal(new List<float>() { 2, 1, 0, 0, 3 }, true);
-            fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4 }, true);
-            
+            //fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4 }, true);
+            fc.InputSignal2 = new Signal(new List<float>() { 2, 1, 4, 0, 0 }, true);
+
             fc.Run();
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNormalizedCorrelation));
         }
 
-        #endregion 
-        
+        #endregion
+
         #region cross fast correlation
         [TestMethod]
         public void CrossFastNormalizedCorrelationTestMethod1()
         {
             FastCorrelation fc = new FastCorrelation();
 
-            var expectedOutput = new Signal(new List<float>() { 0.9667248f, 0.7352555f, 0.6807921f, 0.8577981f}, false);
+            var expectedOutput = new Signal(new List<float>() { 0.9667248f, 0.7352555f, 0.6807921f, 0.8577981f }, false);
 
             fc.InputSignal1 = new Signal(new List<float>() { 4, 3, 1, 6 }, false);
             fc.InputSignal2 = new Signal(new List<float>() { 5, 2, 3, 7 }, false);
@@ -963,6 +943,8 @@ namespace DSPComponentsUnitTest
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNormalizedCorrelation));
         }
+
+
 
         [TestMethod]
         public void CrossFastNonNormalizedCorrelationTestMethod1()
@@ -979,6 +961,8 @@ namespace DSPComponentsUnitTest
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, fc.OutputNonNormalizedCorrelation));
 
         }
+
+
 
         [TestMethod]
         public void CrossFastNormalizedCorrelationTestMethod2()
@@ -1013,80 +997,4 @@ namespace DSPComponentsUnitTest
         #endregion
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
