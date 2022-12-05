@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Numerics;
 using System.Threading.Tasks;
 using DSPAlgorithms.DataStructures;
 
@@ -15,34 +16,27 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
+            List<float> Freqs = new List<float>();
+            List<float> AMP = new List<float>();
+            List<float> PH = new List<float>();
+            Complex harmonic;
             int N = InputTimeDomainSignal.Samples.Count;
-            float Pi = (float)Math.PI;
-            float R, I;
-            List<float> Amplitudes = new List<float>();
-            List<float> PhaseShifts = new List<float>();
-            // x(n)(Cos(θ) - j Sin(θ))
-            // R - j I
-            // Amp = (R^2 + I^2 )^1/2
-            // Φ = tan^-1 (I / R)
+            //X[k]= n∑ x[n]e^(−j2πkn/N).
             for (int k = 0; k < N; k++)
             {
-                R = 0;
-                I = 0;
+                harmonic = new Complex();
                 for (int n = 0; n < N; n++)
                 {
-                    float θ = (2 * k * Pi * n) / N;
-                    R += (float)Math.Cos(θ) * InputTimeDomainSignal.Samples[n];
-                    I += (float)Math.Sin(θ) * - InputTimeDomainSignal.Samples[n];
+                    double num = -k * 2 * Math.PI * n / N;
+                    Complex l = new Complex(InputTimeDomainSignal.Samples[n], 0);
+                    Complex r = new Complex(Math.Cos(num), Math.Sin(num));
+                    harmonic = Complex.Add(harmonic, l * r);
                 }
-                float Amp2 = (float)(Math.Pow(R, 2) + Math.Pow(I, 2));
-                float Amp = (float)Math.Sqrt(Amp2);
-                float Φ = (float)Math.Atan2(I, R);
-                Amplitudes.Add(Amp);
-                PhaseShifts.Add(Φ);
+                AMP.Add((float)harmonic.Magnitude);
+                PH.Add((float)harmonic.Phase);
+                Freqs.Add(k);
             }
-            OutputFreqDomainSignal = new Signal(InputTimeDomainSignal.Samples, true);
-            OutputFreqDomainSignal.FrequenciesAmplitudes = Amplitudes;
-            OutputFreqDomainSignal.FrequenciesPhaseShifts = PhaseShifts;
+            OutputFreqDomainSignal = new Signal(false, Freqs, AMP, PH);
         }
     }
 }

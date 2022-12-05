@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
+using System.Threading.Tasks;
 using DSPAlgorithms.DataStructures;
 
 namespace DSPAlgorithms.Algorithms
@@ -15,36 +15,22 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-
-            List<float> Amplitudes = InputFreqDomainSignal.FrequenciesAmplitudes;
-            List<float> PhaseShifts = InputFreqDomainSignal.FrequenciesPhaseShifts;
+            List<float> L = new List<float>();
             int N = InputFreqDomainSignal.Frequencies.Count;
-            float Pi = (float)Math.PI;
-            List<Complex> X = new List<Complex>();
-            List<float> Res = new List<float>();
-            float R, I, Real, Imag;
-            for (int i = 0; i < N; i++)
+            Complex harmonic;
+            for (int k = 0; k < N; k++)
             {
-                Real = Amplitudes[i] * (float)Math.Cos(PhaseShifts[i]);
-                Imag = Amplitudes[i] * (float)Math.Sin(PhaseShifts[i]);
-                X.Add(new Complex(Real, Imag));
-            }
-            for (int n = 0; n < N; n++)
-            {
-                Complex com, mul;
-                float sum = 0;
-                for (int k = 0; k < N; k++)
+                harmonic = new Complex();
+                for (int n = 0; n < N; n++)
                 {
-                    float θ = (2 * k * Pi * n) / N;
-                    R = (float)Math.Cos(θ);
-                    I = (float)Math.Sin(θ);
-                    com = new Complex(R, I);
-                    mul = Complex.Multiply(X[k], com);
-                    sum += (float)(mul.Real + mul.Imaginary);
+                    double num = k * 2 * Math.PI * n / N;
+                    Complex l = new Complex(InputFreqDomainSignal.FrequenciesAmplitudes[n] * Math.Cos(InputFreqDomainSignal.FrequenciesPhaseShifts[n]), InputFreqDomainSignal.FrequenciesAmplitudes[n] * Math.Sin(InputFreqDomainSignal.FrequenciesPhaseShifts[n]));
+                    Complex r = new Complex(Math.Cos(num), Math.Sin(num));
+                    harmonic = Complex.Add(harmonic, Complex.Multiply(l, r));
                 }
-                Res.Add(sum / N);
+                L.Add((float)harmonic.Real / N);
             }
-            OutputTimeDomainSignal = new Signal(Res, true);
+            OutputTimeDomainSignal = new Signal(L, false);
         }
     }
 }
