@@ -54,7 +54,7 @@ namespace DSPAlgorithms.Algorithms
             }
             float deltaF = InputTransitionBand / InputFS;  // normalize
             N = x / deltaF;
-            N = (float)Math.Ceiling(N);
+            N = (float)Math.Ceiling(N); // upper bound
             if (N % 2 == 0) N++;
             int n = (int)((N - 1) / 2);
             for (int i = -n; i <= n; i++)
