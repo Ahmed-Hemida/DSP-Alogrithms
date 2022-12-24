@@ -19,7 +19,7 @@ namespace DSPAlgorithms.Algorithms
         public Signal OutputFreqDomainSignal { get; set; }
         public override void Run()
         {
-            string file_path = @"C:\Users\Administrator\Desktop\tmam";
+            string file_path = @"C:\\Users\\pop\\OneDrive\\Desktop\\dsp\\";
             Signal InputSignal = LoadSignal(SignalPath);
             FIR fir = new FIR();
             fir.InputFilterType = DSPAlgorithms.DataStructures.FILTER_TYPES.BAND_PASS;
