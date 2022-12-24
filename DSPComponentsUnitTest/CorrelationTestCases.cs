@@ -1,3 +1,8 @@
+﻿using DSPAlgorithms.Algorithms;
+using DSPAlgorithms.DataStructures;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
@@ -997,6 +1002,79 @@ namespace DSPComponentsUnitTest
         #endregion
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
