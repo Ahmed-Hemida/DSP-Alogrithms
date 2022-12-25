@@ -1,8 +1,29 @@
-﻿using System;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using DSPAlgorithms.DataStructures;
+
+//namespace DSPAlgorithms.Algorithms
+//{
+//    public class DiscreteFourierTransform : Algorithm
+//    {
+//        public Signal InputTimeDomainSignal { get; set; }
+//        public float InputSamplingFrequency { get; set; }
+//        public Signal OutputFreqDomainSignal { get; set; }
+
+//        public override void Run()
+//        {
+//            throw new NotImplementedException();
+//        }
+//    }
+//}
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Numerics;
 using System.Threading.Tasks;
 using DSPAlgorithms.DataStructures;
 
@@ -16,27 +37,34 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            List<float> Freqs = new List<float>();
-            List<float> AMP = new List<float>();
-            List<float> PH = new List<float>();
-            Complex harmonic;
+            List<float> ampl = new List<float>();
+            List<float> phase = new List<float>();
+            List<float> xaxis = new List<float>();
+
             int N = InputTimeDomainSignal.Samples.Count;
-            //X[k]= n∑ x[n]e^(−j2πkn/N).
+            float omg = ((float)(2 * Math.PI / N * (1 / InputSamplingFrequency)));    //omega 
             for (int k = 0; k < N; k++)
             {
-                harmonic = new Complex();
+                double x = 0;//cos 
+                double y = 0; //sin 
+                double z = 0;
                 for (int n = 0; n < N; n++)
                 {
-                    double num = -k * 2 * Math.PI * n / N;
-                    Complex l = new Complex(InputTimeDomainSignal.Samples[n], 0);
-                    Complex r = new Complex(Math.Cos(num), Math.Sin(num));
-                    harmonic = Complex.Add(harmonic, l * r);
+                    x += InputTimeDomainSignal.Samples[n] * Math.Cos((k * 2 * Math.PI * n) / N);  // real 
+                    y -= InputTimeDomainSignal.Samples[n] * Math.Sin((k * 2 * Math.PI * n) / N); // imagen
                 }
-                AMP.Add((float)harmonic.Magnitude);
-                PH.Add((float)harmonic.Phase);
-                Freqs.Add(k);
+                //A=sqrt(x^2+y^2)
+                double amp = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+                ampl.Add((float)amp);
+                // phaseshift
+                double pha = Math.Atan2(y, x);
+                phase.Add((float)pha);
+                // x_axis
+                z = omg * (k + 1); // multiples  of omega
+
+                xaxis.Add((float)z);
             }
-            OutputFreqDomainSignal = new Signal(false, Freqs, AMP, PH);
+            OutputFreqDomainSignal = new Signal(false, xaxis, ampl, phase);
         }
     }
 }

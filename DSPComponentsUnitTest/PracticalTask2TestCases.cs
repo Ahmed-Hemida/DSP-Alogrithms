@@ -26,7 +26,7 @@ namespace DSPComponentsUnitTest
 
             var signal = UnitTestUtitlities.LoadSignal(T2_Obj.SignalPath);
             T2_Obj.Run();
-            Signal Res = T2_Obj.OutputFreqDomainSignal;
+            Signal Res=T2_Obj.OutputFreqDomainSignal;
 
 
             var expectedOutput = UnitTestUtitlities.LoadSignal("TestingSignals/FileDown.ds");

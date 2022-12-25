@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DSPAlgorithms.Algorithms
 {
-    public class Derivatives : Algorithm
+    public class Derivatives: Algorithm
     {
         public Signal InputSignal { get; set; }
         public Signal FirstDerivative { get; set; }
@@ -17,25 +17,20 @@ namespace DSPAlgorithms.Algorithms
         public override void Run()
         {
 
-            // First Derivative = x(n) - x(n-1)
-
-            List<float> st = new List<float>();
-
-            for (int i = 1; i < InputSignal.Samples.Count; i++)
+            List<float> first = new List<float>();
+            List<float> second = new List<float>();
+            float n = InputSignal.Samples.Count;
+            for (int i = 1; i < n; i++)
             {
-                st.Add(InputSignal.Samples[i] - InputSignal.Samples[i - 1]);
+                first.Add(InputSignal.Samples[i] - InputSignal.Samples[i - 1]);
             }
-            FirstDerivative = new Signal(st, false);
-
-            // Second Derivative  
-            //Y(n)= x(n+1)-2x(n)+x(n-1)  
-            List<float> nd = new List<float>();
-
-            for (int i = 1; i < InputSignal.Samples.Count - 1; i++)
+            for (int i = 1; i < n - 1; i++)
             {
-                nd.Add(InputSignal.Samples[i + 1] - 2 * (InputSignal.Samples[i]) + InputSignal.Samples[i - 1]);
+                second.Add(InputSignal.Samples[i + 1] - 2 * InputSignal.Samples[i] + InputSignal.Samples[i - 1]);
             }
-            SecondDerivative = new Signal(nd, false);
+            second.Add(0);
+            FirstDerivative = new Signal(first, false);
+            SecondDerivative = new Signal(second, false);
         }
     }
 }

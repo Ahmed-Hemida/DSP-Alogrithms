@@ -21,7 +21,7 @@ namespace DSPComponentsUnitTest
 
             obj.Run();
 
-            var expectedOutput = UnitTestUtitlities.LoadSignal("E:\\ahmed\\dsp\\fcisdsp-dsp.toolbox-78ddd969882b\\DSP-Alogrithms\\DSPComponentsUnitTest\\TestingSignals\\Sin.ds");
+            var expectedOutput = UnitTestUtitlities.LoadSignal("C:\\Users\\Administrator\\Downloads\\fcisdsp-dsp.toolbox-78ddd969882b\\fcisdsp-dsp.toolbox-78ddd969882b\\DSPToolbox\\DSPComponentsUnitTest\\TestingSignals\\Sin.ds");
 
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, obj.samples));
 
@@ -37,7 +37,7 @@ namespace DSPComponentsUnitTest
             obj.PhaseShift = 2.35619449019235f;
 
             obj.Run();
-            var expectedOutput = UnitTestUtitlities.LoadSignal("E:\\ahmed\\dsp\\fcisdsp-dsp.toolbox-78ddd969882b\\DSP-Alogrithms\\DSPComponentsUnitTest\\TestingSignals\\Cos.ds");
+            var expectedOutput = UnitTestUtitlities.LoadSignal("C:\\Users\\Administrator\\Downloads\\fcisdsp-dsp.toolbox-78ddd969882b\\fcisdsp-dsp.toolbox-78ddd969882b\\DSPToolbox\\DSPComponentsUnitTest\\TestingSignals\\Cos.ds");
             Assert.IsTrue(UnitTestUtitlities.SignalsSamplesAreEqual(expectedOutput.Samples, obj.samples));
 
 

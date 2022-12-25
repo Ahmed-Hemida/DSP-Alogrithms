@@ -47,19 +47,15 @@
     <Compile Include="Algorithms\DCT.cs" />
     <Compile Include="Algorithms\DC_Component.cs" />
     <Compile Include="Algorithms\Derivatives.cs" />
-    <Compile Include="Algorithms\DirectConvolution.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Algorithms\DirectConvolution.cs" />
     <Compile Include="Algorithms\DirectCorrelation.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Algorithms\FastConvolution.cs" />
     <Compile Include="Algorithms\DiscreteFourierTransform.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Algorithms\FastCorrelation.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Algorithms\FastConvolution.cs" />
+    <Compile Include="Algorithms\FastCorrelation.cs" />
     <Compile Include="Algorithms\FastFourierTransform.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -67,9 +63,7 @@
     <Compile Include="Algorithms\Folder.cs" />
     <Compile Include="Algorithms\InverseDiscreteFourierTransform.cs" />
     <Compile Include="Algorithms\InverseFastFourierTransform.cs" />
-    <Compile Include="Algorithms\MovingAverage.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Algorithms\MovingAverage .cs" />
     <Compile Include="Algorithms\MultiplySignalByConstant.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -84,7 +78,7 @@
     <Compile Include="Algorithms\Subtractor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Algorithms\Time_Delay.cs" />
+    <Compile Include="Algorithms\TimeDelay.cs" />
     <Compile Include="Algorithms\Utilities.cs">
       <SubType>Code</SubType>
     </Compile>

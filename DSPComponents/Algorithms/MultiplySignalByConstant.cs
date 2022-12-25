@@ -15,23 +15,14 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            // throw new NotImplementedException();
-            int loopCounter = 0;
+            List<float> outputs = new List<float>();
+            OutputMultipliedSignal = new Signal(outputs, true);
+            for (int i = 0; i < InputSignal.Samples.Count; i++)
+            {
 
-                loopCounter = InputSignal.Samples.Count();
+                outputs.Add(InputSignal.Samples[i] * InputConstant);
+            }
 
-            List<float> SigSamples = new List<float>(unchecked((int)loopCounter));
-
-            for (int i = 0; i < loopCounter; i++)
-                    {
-                        if ((!float.IsNaN(InputSignal.Samples[i]) ))
-                        {
-                            SigSamples.Add(InputSignal.Samples[i] * InputConstant);
-
-                        }
-                      }
-
-            OutputMultipliedSignal = new Signal(SigSamples, InputSignal.Periodic);
         }
     }
 }

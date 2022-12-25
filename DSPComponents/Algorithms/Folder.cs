@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using DSPAlgorithms.DataStructures;
 
 namespace DSPAlgorithms.Algorithms
@@ -15,23 +18,21 @@ namespace DSPAlgorithms.Algorithms
         public override void Run()
         {
 
+            // throw new NotImplementedException();
+            List<float> val = new List<float>();
 
-
-            int individualSampleindces;
-            List<int> mylistindces = new List<int>();
-            int counter = 0;
-
-            float individualSample;
-            List<float> mylistsamples = new List<float>();
-            for (int i = InputSignal.Samples.Count() - 1; i >= 0; i--)
+            List<int> index = new List<int>();
+            for (int i = 0; i < InputSignal.Samples.Count; i++)
             {
-                individualSampleindces = InputSignal.SamplesIndices[i] * -1;
-                mylistindces.Add(individualSampleindces);
-                individualSample = InputSignal.Samples[i];
-                mylistsamples.Add(individualSample);
+                int x = (InputSignal.Samples.Count) - i - 1;
+                val.Add(InputSignal.Samples[x]);
+                index.Add(-1 * InputSignal.SamplesIndices[InputSignal.Samples.Count - i - 1]);
             }
-
-            OutputFoldedSignal = new Signal(mylistsamples, mylistindces, !InputSignal.Periodic);
+            /*  for (int i = 0; i < InputSignal.Samples.Count; i++)
+              {
+                  res.Add(InputSignal.Samples[-i]);
+              }*/
+            OutputFoldedSignal = new Signal(val, index, false);
         }
     }
 }

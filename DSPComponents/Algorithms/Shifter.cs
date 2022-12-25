@@ -15,42 +15,16 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-
-            // if periodric>> folding happend >> true >> make shifting *-1
-            // if not periodric >>folding not happend>> false>> make shifting *1
-
-            int individualSampleindces;
-            List<int> mylistindces = new List<int>();
-            List<float> mylistsamples = new List<float>();
-            for (int i = 0; i < InputSignal.Samples.Count; i++)
+            //throw new NotImplementedException();
+            List<int> val = new List<int>();
+            List<float> res = new List<float>();
+            for (int i = 0; i < InputSignal.Samples.Count(); i++)
             {
-                mylistsamples.Add(InputSignal.Samples[i]);
+                val.Add(InputSignal.SamplesIndices[i] + ShiftingValue);
+                res.Add(InputSignal.Samples[i]);
+
             }
-
-            if (InputSignal.Periodic == true)  // if periodric>> folding happend
-            {
-                ShiftingValue = ShiftingValue * -1;
-                for (int i = 0; i < InputSignal.Samples.Count(); i++)
-                {
-                    individualSampleindces = InputSignal.SamplesIndices[i] - ShiftingValue;
-                    mylistindces.Add(individualSampleindces);
-
-                }
-            }
-            else
-            {
-                ShiftingValue = ShiftingValue * 1;
-                for (int i = 0; i < InputSignal.Samples.Count(); i++)
-                {
-                    individualSampleindces = InputSignal.SamplesIndices[i] - ShiftingValue;
-                    mylistindces.Add(individualSampleindces);
-                }
-            }
-
-
-
-            OutputShiftedSignal = new Signal(mylistsamples, mylistindces, InputSignal.Periodic);
-
+            OutputShiftedSignal = new Signal(res, val, true);
         }
     }
 }

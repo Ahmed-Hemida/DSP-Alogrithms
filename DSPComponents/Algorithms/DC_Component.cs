@@ -14,13 +14,23 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            List<float> res = new List<float>();
-            float avg = Queryable.Average(InputSignal.Samples.AsQueryable());
-            for (int i = 0; i < InputSignal.Samples.Count; i++)
+            float sum = 0, res = 0, avrage, count = InputSignal.Samples.Count;
+            List<float> output = new List<float>();
+            for (int i = 0; i < count; i++)
             {
-                res.Add(InputSignal.Samples[i] - avg);
+                sum += InputSignal.Samples[i];
+
             }
-            OutputSignal = new Signal(res, false);
+            avrage = sum / count;
+
+            for (int i = 0; i < count; i++)
+            {
+                res = InputSignal.Samples[i] - avrage;
+                output.Add(res);
+
+            }
+
+            OutputSignal = new Signal(output, false);
         }
     }
 }

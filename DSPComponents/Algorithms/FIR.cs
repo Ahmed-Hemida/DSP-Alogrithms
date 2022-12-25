@@ -147,19 +147,19 @@ namespace DSPAlgorithms.Algorithms
         }
         float LowPass(int n)
         {
-            return (n == 0)? 2 * Fc:(float)(2 * Fc * (Math.Sin(n * 2 * Math.PI * Fc)) / (n * 2 * Math.PI * Fc));
+            return (n == 0) ? 2 * Fc : (float)(2 * Fc * (Math.Sin(n * 2 * Math.PI * Fc)) / (n * 2 * Math.PI * Fc));
         }
         float HighPass(int n)
         {
-            return (n == 0)? 1 - (2 * Fc): (float)(-2 * Fc * (Math.Sin(n * 2 * Math.PI * Fc)) / (n * 2 * Math.PI * Fc));
+            return (n == 0) ? 1 - (2 * Fc) : (float)(-2 * Fc * (Math.Sin(n * 2 * Math.PI * Fc)) / (n * 2 * Math.PI * Fc));
         }
         float BandPass(int n)
         {
-            return (n == 0)?2 * (Fc2 - Fc1):(float)(2 * Fc2 * (Math.Sin(n * 2 * Math.PI * Fc2)) / (n * 2 * Math.PI * Fc2)) - (float)(2 * Fc1 * (Math.Sin(n * 2 * Math.PI * Fc1)) / (n * 2 * Math.PI * Fc1));
+            return (n == 0) ? 2 * (Fc2 - Fc1) : (float)(2 * Fc2 * (Math.Sin(n * 2 * Math.PI * Fc2)) / (n * 2 * Math.PI * Fc2)) - (float)(2 * Fc1 * (Math.Sin(n * 2 * Math.PI * Fc1)) / (n * 2 * Math.PI * Fc1));
         }
         float BandStop(int n)
         {
-           return (n == 0)?  1 - (2 * (Fc2 - Fc1)):(float)(2 * Fc1 * (Math.Sin(n * 2 * Math.PI * Fc1)) / (n * 2 * Math.PI * Fc1)) - (float)(2 * Fc2 * (Math.Sin(n * 2 * Math.PI * Fc2)) / (n * 2 * Math.PI * Fc2));
+            return (n == 0) ? 1 - (2 * (Fc2 - Fc1)) : (float)(2 * Fc1 * (Math.Sin(n * 2 * Math.PI * Fc1)) / (n * 2 * Math.PI * Fc1)) - (float)(2 * Fc2 * (Math.Sin(n * 2 * Math.PI * Fc2)) / (n * 2 * Math.PI * Fc2));
         }
 
         float hanning(int n)

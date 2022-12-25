@@ -15,15 +15,18 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            int N = InputSignal.Samples.Count;
-            float Sum = 0;
-            List<float> values = new List<float>();
-            for (int i = 0; i < N; i++)
+            List<float> temp = new List<float>();
+            temp.Add(InputSignal.Samples[0]);
+            for (int i = 1; i < InputSignal.Samples.Count(); i++)
             {
-                Sum += InputSignal.Samples[i];
-                values.Add(Sum);
+                
+              
+               
+                temp.Add(InputSignal.Samples[i] + temp[i-1]);
+
             }
-            OutputSignal = new Signal(values, false);
+
+            OutputSignal = new Signal(temp, false);
         }
     }
 }

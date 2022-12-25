@@ -7,26 +7,30 @@ using System.Threading.Tasks;
 
 namespace DSPAlgorithms.Algorithms
 {
-    public class DCT: Algorithm
+    public class DCT : Algorithm
     {
         public Signal InputSignal { get; set; }
         public Signal OutputSignal { get; set; }
 
         public override void Run()
         {
-            float Sum;
-            List<float> L = new List<float>();
-            int N = InputSignal.Samples.Count();
-            for (int k = 0; k <N ; k++)
+
+            //throw new NotImplementedException();
+            List<float> output = new List<float>();
+            float N = InputSignal.Samples.Count;
+            for (int k = 0; k < N; k++)
             {
-                Sum = 0;
-                for (int n = 0; n < N; n++)
+                double sum = 0.0f;
+                for (int n = 0; n < InputSignal.Samples.Count; n++)
                 {
-                    Sum += (float)(InputSignal.Samples[n] * (Math.Cos((float)(((2 * n) - 1) * (2 * k - 1) * (Math.PI)) / (4 * N))));
+                    sum += InputSignal.Samples[n] * Math.Cos((Math.PI / (4 * N)) * (2 * n - 1) * (2 * k - 1));
                 }
-                L.Add((float)(Math.Sqrt(2.0f / InputSignal.Samples.Count())) * Sum);
+                double result;
+                result = Math.Sqrt(2 / N) * sum;
+                output.Add((float)result);
+
             }
-            OutputSignal = new Signal(L, false);
+            OutputSignal = new Signal(output, InputSignal.Periodic);
         }
     }
 }

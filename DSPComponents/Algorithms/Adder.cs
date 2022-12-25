@@ -14,45 +14,12 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            Signal a1 = this.InputSignals[0];
-            Signal a2 = this.InputSignals[1];
-            bool Periodic;
-            int loopCounter = 0;
-            if (a1.Samples.Count() > a2.Samples.Count()) 
+            List<float> output = new List<float>();
+            OutputSignal = new Signal(output, true);
+            for (int i = 0; i < InputSignals[0].Samples.Count; i++)
             {
-                loopCounter = a1.Samples.Count();
-                Periodic = a1.Periodic;
-
-            } else 
-            {
-                loopCounter = a2.Samples.Count();
-                Periodic = a2.Periodic;
+                output.Add(InputSignals[0].Samples[i] + InputSignals[1].Samples[i]);
             }
-
-
-            List<float> SigSamples = new List<float>(unchecked((int)loopCounter));
-
-
-            for (int i = 0; i < loopCounter ; i++)
-            {
-                if ((!float.IsNaN(a1.Samples[1]) && !float.IsNaN(a2.Samples[i])))
-                {
-                    SigSamples.Add(a1.Samples[i]+ a2.Samples[i]);
-                }
-                else if ((float.IsNaN(a1.Samples[i]) && !float.IsNaN(a2.Samples[i])))
-                {
-                    SigSamples.Add( a2.Samples[i]);
-                }
-                else if ((!float.IsNaN(a1.Samples[i]) && float.IsNaN(a2.Samples[i])))
-                {
-                    SigSamples.Add(a1.Samples[i]);
-                }
-                    
-            
-            }
-
-            OutputSignal = new Signal(SigSamples, Periodic);
-
         }
     }
 }

@@ -16,58 +16,96 @@ namespace DSPAlgorithms.Algorithms
 
         public override void Run()
         {
-            int c = InputSignal1.Samples.Count;
+            OutputNonNormalizedCorrelation = new List<float>();
+            OutputNormalizedCorrelation = new List<float>();
+            List<float> signal2 = new List<float> { };
+            int size = InputSignal1.Samples.Count;
             if (InputSignal2 == null)
             {
-                List<float> sampels = new List<float>();
-
-                InputSignal2 = new Signal(sampels, false);
-                for (int i = 0; i < c; i++)
-                    InputSignal2.Samples.Add(InputSignal1.Samples[i]);
-            }
-            double norm = 0;
-            double sum1 = 0, sum2 = 0;
-            for (int i = 0; i < c; i++)
-            {
-                sum1 += Math.Pow(InputSignal1.Samples[i], 2);
-                sum2 += Math.Pow(InputSignal2.Samples[i], 2);
-
-            }
-            norm = Math.Sqrt(sum1 * sum2) / c;
-            int co;
-            List<float> non_norm_s = new List<float>();
-            List<float> norm_s = new List<float>();
-            double temp2 = 1;
-
-            for (int i = 0; i < c; i++)
-            {
-                co = i;
-                double temp = 0;
-                temp2 = 1;
-
-                for (int j = 0; j < c; j++)
+                for (int i = 0; i < size; i++)
                 {
-                    if (co >= c)
-                    {
-                        if (InputSignal1.Periodic != true)
-                        {
-                            temp2 = 0;
-                        }
-                        co = 0;
-                    }
-                    temp += InputSignal1.Samples[j] * InputSignal2.Samples[co] * temp2;
-
-                    co++;
-
-
+                    signal2.Add(InputSignal1.Samples[i]);
 
                 }
-                non_norm_s.Add((float)temp / c);
-                norm_s.Add(non_norm_s[i] / (float)norm);
-            }
+                float sqrsum1 = 0;
+                for (int i = 0; i < size; i++)
+                {
+                    sqrsum1 += InputSignal1.Samples[i] * signal2[i];
 
-            OutputNonNormalizedCorrelation = non_norm_s;
-            OutputNormalizedCorrelation = norm_s;
+                }
+                double P = sqrsum1 / size;
+                for (int i = 0; i < size; i++)
+                {
+                    float temp = 0;
+                    for (int j = 0; j < size; j++)
+                    {
+                        if (InputSignal1.Periodic)
+                        {
+                            temp += (InputSignal1.Samples[j] * signal2[(i + j) % size]);
+
+                        }
+                        else
+                        {
+                            if (i + j >= size)
+                            {
+                                temp += 0;
+                            }
+                            else
+                            {
+                                temp += (InputSignal1.Samples[j] * signal2[i + j]);
+                            }
+
+                        }
+                    }
+
+                    OutputNonNormalizedCorrelation.Add(temp / size);
+                    OutputNormalizedCorrelation.Add((float)((temp / size) / P));
+
+                }
+            }
+            else
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    signal2.Add(InputSignal2.Samples[i]);
+
+                }
+                float sqrsum1 = 0;
+                float sqrsum2 = 0;
+                for (int i = 0; i < size; i++)
+                {
+                    sqrsum1 += InputSignal1.Samples[i] * InputSignal1.Samples[i];
+                    sqrsum2 += signal2[i] * signal2[i];
+
+                }
+                double P = (Math.Sqrt(sqrsum1 * sqrsum2)) / size;
+                for (int i = 0; i < size; i++)
+                {
+                    float temp = 0;
+                    for (int j = 0; j < size; j++)
+                    {
+                        if (InputSignal2.Periodic)
+                        {
+                            temp += (InputSignal1.Samples[j] * signal2[(i + j) % size]);
+                        }
+                        else
+                        {
+                            if (i + j >= size)
+                            {
+                                temp += 0;
+                            }
+                            else
+                            {
+                                temp += (InputSignal1.Samples[j] * signal2[i + j]);
+                            }
+
+                        }
+                    }
+                    OutputNonNormalizedCorrelation.Add(temp / size);
+                    OutputNormalizedCorrelation.Add((float)((temp / size) / P));
+
+                }
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ using DSPAlgorithms.DataStructures;
 
 namespace DSPAlgorithms.Algorithms
 {
-    public class SinCos: Algorithm
+    public class SinCos : Algorithm
     {
         public string type { get; set; }
         public float A { get; set; }
@@ -18,31 +18,29 @@ namespace DSPAlgorithms.Algorithms
         public List<float> samples { get; set; }
         public override void Run()
         {
-            float f = AnalogFrequency / SamplingFrequency; //  F / Fs
-            float res;
             samples = new List<float>();
-            switch (type)
+            for (int i = 0; i < SamplingFrequency; i++)
             {
-                // y(t) = A Cos(2πft + θ))
-                case "cos":
-                    for (int t = 0; t < SamplingFrequency; t++)
-                    {
-                        res = A * (float)Math.Cos(2 * Math.PI * f * t + PhaseShift);
-                        samples.Add(res);
-                    }
-                    break;
+                if (type == "sin")
+                {
+                    //x(n)= A sin(2*pi*n*f/fs + phaseShift )
+                    // where f =  AnalogFrequency  and fs = SamplingFrequency
+                    samples.Add((float)(A * Math.Sin(2 * Math.PI * i * AnalogFrequency / SamplingFrequency + PhaseShift)));
 
-                // y(t) = A Sin(2πft + θ)
-                case "sin":
-                    for (int t = 0; t < SamplingFrequency; t++)
-                    {
-                        res = A * (float)Math.Sin(2 * Math.PI * f * t + PhaseShift);
-                        samples.Add(res);
-                    }
-                    break;
+                }
 
-                default:
-                    break;
+                else if (type == "cos")
+                {
+
+                    //x(n)= A cos(2*pi*n*f/fs + phaseShift )
+                    // where f =  AnalogFrequency  and fs = SamplingFrequency
+                    samples.Add((float)(A * Math.Cos(2 * Math.PI * i * AnalogFrequency / SamplingFrequency + PhaseShift)));
+
+
+                }
+
+
+
             }
         }
     }

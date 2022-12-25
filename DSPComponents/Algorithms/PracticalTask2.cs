@@ -19,7 +19,7 @@ namespace DSPAlgorithms.Algorithms
         public Signal OutputFreqDomainSignal { get; set; }
         public override void Run()
         {
-            string file_path = @"C:\\Users\\pop\\OneDrive\\Desktop\\dsp\\";
+            string file_path = @"C:\\Users\\pop\\OneDrive\\Desktop\\dsp";
             Signal InputSignal = LoadSignal(SignalPath);
             FIR fir = new FIR();
             fir.InputFilterType = DSPAlgorithms.DataStructures.FILTER_TYPES.BAND_PASS;
@@ -110,7 +110,7 @@ namespace DSPAlgorithms.Algorithms
                 SigIndices = null;
             }
             int i = 0;
-            for( i = 0 ; i < N1 ; i++)
+            for (i = 0; i < N1; i++)
             {
                 if (sigType == 0 || sigType == 2)
                 {
@@ -125,14 +125,14 @@ namespace DSPAlgorithms.Algorithms
                     SigFreqAmp.Add(float.Parse(Freq_Amp_PhaseShift[1]));
                     SigPhaseShift.Add(float.Parse(Freq_Amp_PhaseShift[2]));
                 }
-           
+
             }
 
             if (!sr.EndOfStream)
             {
                 long N2 = long.Parse(sr.ReadLine());
 
-                for (int j=0; j < N2;j++)
+                for (int j = 0; j < N2; j++)
                 {
                     var Freq_Amp_PhaseShift = sr.ReadLine().Split();
                     SigFreq.Add(float.Parse(Freq_Amp_PhaseShift[0]));
@@ -170,7 +170,7 @@ namespace DSPAlgorithms.Algorithms
                 {
                     writer.WriteLine(sig.FrequenciesAmplitudes.Count());
 
-                    for (int i = 0;i < sig.FrequenciesAmplitudes.Count();i++)
+                    for (int i = 0; i < sig.FrequenciesAmplitudes.Count(); i++)
                     {
                         writer.Write(sig.Frequencies[i]);
                         writer.Write(" ");
@@ -178,20 +178,20 @@ namespace DSPAlgorithms.Algorithms
                         writer.Write(" ");
                         writer.Write(sig.FrequenciesPhaseShifts[i]);
                         writer.WriteLine();
-                        
+
                     }
 
                 }
                 else  //signal in time domain // signal in Freq
                 {
                     writer.WriteLine(sig.Samples.Count());
-                    for (int i=0 ; i < sig.Samples.Count();i++)
+                    for (int i = 0; i < sig.Samples.Count(); i++)
                     {
                         writer.Write(sig.SamplesIndices[i]);
                         writer.Write(" ");
                         writer.Write(sig.Samples[i]);
                         writer.WriteLine();
-                     
+
                     }
                 }
 
